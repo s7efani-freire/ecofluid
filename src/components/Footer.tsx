@@ -8,8 +8,8 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
-            <div className="bg-white px-4 py-2 rounded inline-block mb-4">
-              <span className="text-xl font-bold text-slate-900">ECOFLUID</span>
+            <div className="px-4 py-2 rounded inline-block mb-4">
+              <img src="/logo.png" alt="Logo da Ecofluid" className="h-12 w-auto" />
             </div>
             <p className="text-slate-400 mb-4">
               Transformando materiais reciclados em soluções sustentáveis para irrigação.
@@ -49,10 +49,9 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-lg mb-4">Produtos</h3>
             <ul className="space-y-2 text-slate-400">
-              <li>Mangueiras PEAD</li>
+              <li>PEAD</li>
               <li>Tubos de Irrigação</li>
-              <li>Acessórios</li>
-              <li>Soluções Personalizadas</li>
+              <li>PEBD</li>
             </ul>
           </div>
 
@@ -61,7 +60,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-slate-400">
                 <MapPin className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                <span className="text-sm">Estrada Industrial, 777<br />Zona Industrial - RS</span>
+                <span className="text-sm">Pé de Galinha, 116<br />Zona Rural 9, Vitória da Conquista -BA</span>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-5 h-5 text-green-400 flex-shrink-0" />
@@ -71,8 +70,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-5 h-5 text-green-400 flex-shrink-0" />
-                <a href="tel:+5551999999999" className="text-slate-400 hover:text-green-400 transition-colors text-sm">
-                  (51) 99999-9999
+                <a href="tel:+557730251551" className="text-slate-400 hover:text-green-400 transition-colors text-sm">
+                  (77) 3025-1551
                 </a>
               </li>
             </ul>
@@ -85,7 +84,7 @@ export default function Footer() {
               {currentYear} Ecofluid. Todos os direitos reservados.
             </p>
             <p className="text-slate-400 text-sm">
-              Desenvolvido com sustentabilidade em mente
+              Desenvolvido por Stéfani Freire
             </p>
           </div>
         </div>
