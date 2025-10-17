@@ -135,8 +135,8 @@ export default function Contact() {
 
           <div className="space-y-6">
             <div className="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-8 rounded-2xl shadow-xl">
-              <div className="bg-white px-4 py-2 rounded inline-block mb-6">
-                <span className="text-2xl font-bold text-slate-900">ECOFLUID</span>
+              <div className="px-4 py-2 rounded inline-block mb-6">
+                <img src="/logo.png" alt="Logo da Ecofluid" className="h-12 w-auto" />
               </div>
 
               <div className="space-y-6">
@@ -144,8 +144,8 @@ export default function Contact() {
                   <MapPin className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
                   <div>
                     <h4 className="font-bold mb-1">Endereço</h4>
-                    <p className="text-slate-300">Estrada Industrial, 777</p>
-                    <p className="text-slate-300">Zona Industrial - RS</p>
+                    <p className="text-slate-300">Pé de Galinha, 116</p>
+                    <p className="text-slate-300">Zona Rural 9, Vitória da Conquista - BA</p>
                   </div>
                 </div>
 
@@ -163,8 +163,8 @@ export default function Contact() {
                   <Phone className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
                   <div>
                     <h4 className="font-bold mb-1">Telefone</h4>
-                    <a href="tel:+5551999999999" className="text-slate-300 hover:text-green-400 transition-colors">
-                      (51) 99999-9999
+                    <a href="tel:+557730251551" className="text-slate-300 hover:text-green-400 transition-colors">
+                      (77) 3025-1551
                     </a>
                   </div>
                 </div>
@@ -193,11 +193,11 @@ export default function Contact() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-green-600 mt-1">✓</span>
-                  <span>Suporte técnico especializado</span>
+                  <span>Suporte especializado</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-green-600 mt-1">✓</span>
-                  <span>Entrega para todo o Brasil</span>
+                  <span>Entrega para todo a região</span>
                 </li>
               </ul>
             </div>
