@@ -21,7 +21,7 @@ export default function Header() {
             <Mail className="w-4 h-4" />
             <span className="hidden sm:inline">contato@ecofluid.com.br</span>
           </a>
-          <a href="wa.me/557730251551" className="flex items-center gap-2 hover:text-green-400 transition-colors">
+          <a href="+557730251551" className="flex items-center gap-2 hover:text-green-400 transition-colors">
             <Phone className="w-4 h-4" />
             <span>(77) 3025-1551</span>
           </a>
@@ -32,7 +32,6 @@ export default function Header() {
         <div className="flex justify-between items-center">
 <a href="#home" className="flex items-center">
   <div className="px-4 py-2 rounded">
-    {/* Substitua o span pela tag img */}
     <img src="/logo.png" alt="Logo da Ecofluid" className="h-12 w-auto" />
   </div>
 </a>
