@@ -9,7 +9,7 @@ export default function Hero() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              Sustentabilidade em <span className="text-green-400">Cada Gota</span>
+              Ecofluid <span className="text-green-400">Plásticos</span>
             </h1>
             <p className="text-xl text-slate-300 mb-8 leading-relaxed">
               A Ecofluid transforma materiais reciclados em produtos de alta qualidade em PEAD,
