@@ -9,14 +9,14 @@ export default function Location() {
           <div className="w-24 h-1 bg-green-500 mx-auto mb-6"></div>
           <p className="text-xl text-slate-600 flex items-center justify-center gap-2">
             <MapPin className="w-6 h-6 text-green-600" />
-            Estrada Industrial, 777 - Zona Industrial - RS
+            Pé de Galinha, 116 - Zona Rural 9, Vitória da Conquista - BA, 45020-377
           </p>
         </div>
 
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
           <div className="aspect-video w-full relative">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3454.4086815879943!2d-51.2067!3d-30.0346!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAyJzA0LjYiUyA1McKwMTInMjQuMSJX!5e0!3m2!1spt-BR!2sbr!4v1234567890!5m2!1spt-BR!2sbr"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3563.7629464771144!2d-40.89829322488718!3d-14.943374085584603!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x74623000f5902db%3A0x106681fd90359d2f!2z4pm777iPIEVjb2ZsdWlkIHBsw6FzdGljb3MgKFR1Ym9zIFZleCk!5e1!3m2!1spt-BR!2sbr!4v1760703390779!5m2!1spt-BR!2sbr"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -31,9 +31,9 @@ export default function Location() {
             <div className="grid md:grid-cols-3 gap-8">
               <div>
                 <h3 className="font-bold text-lg mb-2 text-green-400">Endereço</h3>
-                <p className="text-slate-300">Estrada Industrial, 777</p>
-                <p className="text-slate-300">Zona Industrial</p>
-                <p className="text-slate-300">Rio Grande do Sul - RS</p>
+                <p className="text-slate-300">Pé de Galinha, 116</p>
+                <p className="text-slate-300">Zona Rural 9</p>
+                <p className="text-slate-300">Vitória da Conquista - BA</p>
               </div>
 
               <div>
@@ -45,7 +45,7 @@ export default function Location() {
               <div>
                 <h3 className="font-bold text-lg mb-2 text-green-400">Como Chegar</h3>
                 <a
-                  href="https://maps.google.com/?q=-30.0346,-51.2067"
+                  href="https://maps.app.goo.gl/gvDwxVQL4StgGvfu7"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition-all mt-2"
