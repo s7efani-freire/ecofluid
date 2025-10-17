@@ -12,7 +12,7 @@ export default function Company() {
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
           <div>
             <img
-              src="https://images.pexels.com/photos/3992933/pexels-photo-3992933.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              src="https://casairriga.com.br/wp-content/uploads/2021/02/mangueira-de-polietileno-irrigacao-3-4-01-600x600.jpg"
               alt="Fábrica Ecofluid"
               className="rounded-2xl shadow-2xl w-full h-[400px] object-cover"
             />
@@ -31,11 +31,11 @@ export default function Company() {
             </p>
             <div className="grid grid-cols-2 gap-4 pt-6">
               <div className="text-center p-4 bg-green-50 rounded-lg">
-                <div className="text-3xl font-bold text-green-600">15+</div>
+                <div className="text-3xl font-bold text-green-600">2+</div>
                 <div className="text-slate-600">Anos de Experiência</div>
               </div>
               <div className="text-center p-4 bg-green-50 rounded-lg">
-                <div className="text-3xl font-bold text-green-600">5000+</div>
+                <div className="text-3xl font-bold text-green-600">5+</div>
                 <div className="text-slate-600">Toneladas Recicladas</div>
               </div>
             </div>
