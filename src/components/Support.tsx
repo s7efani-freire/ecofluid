@@ -1,75 +1,82 @@
-import { Users, Headphones, ClipboardCheck, ThumbsUp } from 'lucide-react';
+import { CheckCircle, Headphones, ShoppingBag, Truck } from 'lucide-react';
 
 export default function Support() {
+  const services = [
+    {
+      icon: Headphones,
+      title: 'Consultoria Especializada',
+      description:
+        'Nossa equipe ajuda você a escolher os produtos mais adequados para suas necessidades.',
+    },
+    {
+      icon: ShoppingBag,
+      title: 'Acompanhamento de Pedidos',
+      description:
+        'Transparência e eficiência em todas as etapas da sua compra.',
+    },
+    {
+      icon: Truck,
+      title: 'Suporte Pós-Venda',
+      description:
+        'Assistência contínua mesmo após a entrega do seu produto.',
+    },
+    {
+      icon: CheckCircle,
+      title: 'Garantia de Satisfação',
+      description: 'Seu sucesso é a nossa prioridade. Estamos aqui para ajudar.',
+    },
+  ];
+
   return (
-    <section id="suporte" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
+    <section id="suporte" className="py-20 bg-gradient-to-br from-eco-50 to-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-eco-800 mb-4">
             Nosso Compromisso com Você
           </h2>
-          <div className="w-24 h-1 bg-green-500 mx-auto"></div>
+          <p className="text-xl text-eco-700 max-w-3xl mx-auto">
+            Oferecemos suporte completo em toda a jornada do cliente, desde a
+            consultoria pré-venda até o acompanhamento pós-entrega.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
           <div>
-            {/* Imagem mais focada em atendimento/consultoria */}
             <img
-              src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="Equipe de atendimento ao cliente em uma reunião"
-              className="rounded-2xl shadow-2xl w-full h-[400px] object-cover"
+              src="https://images.pexels.com/photos/3184398/pexels-photo-3184398.jpeg?auto=compress&cs=tinysrgb&w=800"
+              alt="Equipe de suporte"
+              className="rounded-2xl shadow-2xl w-full h-[400px] object-cover border-4 border-eco-200"
             />
           </div>
 
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-2xl font-bold text-slate-900 mb-4">
-                Suporte Pré e Pós-venda
-              </h3>
-              <p className="text-lg text-slate-700 leading-relaxed mb-6">
-                Nosso compromisso vai além da entrega do produto. Acompanhamos você em
-                cada etapa, desde a escolha da solução ideal para sua necessidade até o
-                suporte contínuo após a compra, garantindo sua total satisfação.
-              </p>
-              <p className="text-lg text-slate-700 leading-relaxed">
-                Acreditamos em parcerias de longo prazo, oferecendo um atendimento
-                ágil e dedicado para que você tenha a melhor experiência com a
-                Ecofluid.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 pt-4">
-              <div className="bg-green-50 p-6 rounded-xl hover:shadow-lg transition-shadow">
-                <Users className="w-10 h-10 text-green-600 mb-3" />
-                <h4 className="font-bold text-slate-900 mb-2">Consultoria Especializada</h4>
-                <p className="text-sm text-slate-600">
-                  Ajudamos você a escolher o produto certo.
+          <div className="grid sm:grid-cols-2 gap-6">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 border-t-4 border-eco-500"
+              >
+                <div className="w-14 h-14 bg-gradient-to-br from-eco-500 to-eco-600 rounded-xl flex items-center justify-center mb-4">
+                  <service.icon className="h-7 w-7 text-white" />
+                </div>
+                <h3 className="text-lg font-bold text-eco-800 mb-2">
+                  {service.title}
+                </h3>
+                <p className="text-eco-700 text-sm leading-relaxed">
+                  {service.description}
                 </p>
               </div>
-
-              <div className="bg-green-50 p-6 rounded-xl hover:shadow-lg transition-shadow">
-                <ClipboardCheck className="w-10 h-10 text-green-600 mb-3" />
-                <h4 className="font-bold text-slate-900 mb-2">Acompanhamento de Pedidos</h4>
-                <p className="text-sm text-slate-600">
-                  Visibilidade e agilidade em sua compra.
-                </p>
-              </div>
-
-              <div className="bg-green-50 p-6 rounded-xl hover:shadow-lg transition-shadow">
-                <Headphones className="w-10 h-10 text-green-600 mb-3" />
-                <h4 className="font-bold text-slate-900 mb-2">Atendimento Pós-venda</h4>
-                <p className="text-sm text-slate-600">
-                  Estamos aqui para ajudar após a entrega.
-                </p>
-              </div>
-
-              <div className="bg-green-50 p-6 rounded-xl hover:shadow-lg transition-shadow">
-                <ThumbsUp className="w-10 h-10 text-green-600 mb-3" />
-                <h4 className="font-bold text-slate-900 mb-2">Garantia de Satisfação</h4>
-                <p className="text-sm text-slate-600">Seu sucesso é a nossa prioridade.</p>
-              </div>
-            </div>
+            ))}
           </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-eco-500 to-eco-600 text-white p-8 rounded-2xl shadow-2xl text-center">
+          <h3 className="text-2xl font-bold mb-3">
+            Construindo Parcerias Duradouras
+          </h3>
+          <p className="text-eco-50 text-lg max-w-2xl mx-auto">
+            Nosso compromisso vai além da venda. Queremos ser seu parceiro de
+            confiança em soluções sustentáveis.
+          </p>
         </div>
       </div>
     </section>

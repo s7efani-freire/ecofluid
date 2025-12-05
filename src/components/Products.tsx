@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react';
+import { Filter, Package } from 'lucide-react';
 import { supabase } from '../lib/supabase';
-import { Package, Filter } from 'lucide-react';
 
 interface Product {
   id: string;
   name: string;
   description: string;
   category: string;
-  specifications: Record<string, string>;
   image_url?: string;
+  specifications: Record<string, string>;
 }
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [filter, setFilter] = useState<string>('all');
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [activeFilter, setActiveFilter] = useState('all');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,10 +26,12 @@ export default function Products() {
       const { data, error } = await supabase
         .from('products')
         .select('*')
-        .order('category', { ascending: true });
+        .order('created_at', { ascending: false });
 
       if (error) throw error;
+
       setProducts(data || []);
+      setFilteredProducts(data || []);
     } catch (error) {
       console.error('Error fetching products:', error);
     } finally {
@@ -36,106 +39,137 @@ export default function Products() {
     }
   };
 
-  const categories = ['all', 'mangueiras', 'PEAD', 'PEBD'];
-  const filteredProducts = filter === 'all'
-    ? products
-    : products.filter(p => p.category === filter);
+  const filterProducts = (category: string) => {
+    setActiveFilter(category);
+    if (category === 'all') {
+      setFilteredProducts(products);
+    } else {
+      setFilteredProducts(
+        products.filter(
+          (p) => p.category.toLowerCase() === category.toLowerCase()
+        )
+      );
+    }
+  };
+
+  const filters = [
+    { id: 'all', label: 'Todos' },
+    { id: 'mangueiras', label: 'Mangueiras' },
+    { id: 'PEAD', label: 'PEAD' },
+    { id: 'PEBD', label: 'PEBD' },
+  ];
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-white to-eco-50 flex items-center justify-center">
+        <div className="text-eco-600 text-xl">Carregando produtos...</div>
+      </div>
+    );
+  }
 
   return (
-    <section id="produtos" className="py-20 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Nossos Produtos</h2>
-          <div className="w-24 h-1 bg-green-500 mx-auto mb-6"></div>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Catálogo completo de tubos PEAD, PEAD e PEBD reciclados para irrigação e condução de fluidos
+    <section id="produtos" className="py-20 bg-gradient-to-br from-white to-eco-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-eco-800 mb-4">
+            Nossos Produtos
+          </h2>
+          <p className="text-xl text-eco-700 max-w-3xl mx-auto">
+            Tubos de plástico reciclado (PEAD e PEBD) para irrigação e
+            transporte de fluidos.
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          <Filter className="w-6 h-6 text-slate-600 self-center" />
-          {categories.map((cat) => (
+        <div className="flex items-center justify-center gap-4 mb-12 flex-wrap">
+          <div className="flex items-center gap-2 text-eco-700">
+            <Filter className="h-5 w-5" />
+            <span className="font-semibold">Filtrar:</span>
+          </div>
+          {filters.map((filter) => (
             <button
-              key={cat}
-              onClick={() => setFilter(cat)}
-              className={`px-6 py-2 rounded-full font-semibold transition-all ${
-                filter === cat
-                  ? 'bg-green-500 text-white shadow-lg'
-                  : 'bg-white text-slate-700 hover:bg-green-50'
+              key={filter.id}
+              onClick={() => filterProducts(filter.id)}
+              className={`px-6 py-2 rounded-lg font-medium transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 ${
+                activeFilter === filter.id
+                  ? 'bg-gradient-to-r from-eco-500 to-eco-600 text-white'
+                  : 'bg-white text-eco-700 hover:bg-eco-100'
               }`}
             >
-              {cat.charAt(0).toUpperCase() + cat.slice(1)}
+              {filter.label}
             </button>
           ))}
         </div>
 
-        {loading ? (
-          <div className="text-center py-20">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-green-500 border-t-transparent"></div>
-            <p className="mt-4 text-slate-600">Carregando produtos...</p>
+        {filteredProducts.length === 0 ? (
+          <div className="text-center py-12 bg-white rounded-2xl shadow-lg">
+            <Package className="h-16 w-16 text-eco-400 mx-auto mb-4" />
+            <p className="text-eco-600 text-lg">
+              Nenhum produto encontrado nesta categoria.
+            </p>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
+                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all overflow-hidden group transform hover:-translate-y-2 border-t-4 border-eco-500"
               >
-                <div className="h-48 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                <div className="h-48 bg-gradient-to-br from-eco-100 to-eco-200 flex items-center justify-center overflow-hidden">
                   {product.image_url ? (
                     <img
                       src={product.image_url}
                       alt={product.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform"
                     />
                   ) : (
-                    <Package className="w-20 h-20 text-white" />
+                    <Package className="h-20 w-20 text-eco-500" />
                   )}
                 </div>
 
                 <div className="p-6">
-                  <div className="inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold mb-3">
+                  <div className="inline-block px-3 py-1 bg-eco-100 text-eco-700 rounded-full text-sm font-semibold mb-3">
                     {product.category}
                   </div>
 
-                  <h3 className="text-xl font-bold text-slate-900 mb-3">
+                  <h3 className="text-xl font-bold text-eco-800 mb-2">
                     {product.name}
                   </h3>
 
-                  <p className="text-slate-600 mb-4 leading-relaxed">
+                  <p className="text-eco-700 mb-4 line-clamp-3">
                     {product.description}
                   </p>
 
-                  <div className="border-t border-slate-200 pt-4 space-y-2">
-                    <h4 className="font-semibold text-slate-900 text-sm uppercase tracking-wide">
-                      Especificações
-                    </h4>
-                    {Object.entries(product.specifications).map(([key, value]) => (
-                      <div key={key} className="flex justify-between text-sm">
-                        <span className="text-slate-600 capitalize">{key}:</span>
-                        <span className="font-semibold text-slate-900">{value}</span>
+                  {product.specifications &&
+                    Object.keys(product.specifications).length > 0 && (
+                      <div className="bg-eco-50 p-4 rounded-lg mb-4">
+                        <h4 className="font-semibold text-eco-800 mb-2 text-sm">
+                          Especificações:
+                        </h4>
+                        <div className="space-y-1 text-sm">
+                          {Object.entries(product.specifications).map(
+                            ([key, value]) => (
+                              <div
+                                key={key}
+                                className="flex justify-between text-eco-700"
+                              >
+                                <span className="font-medium">{key}:</span>
+                                <span>{value}</span>
+                              </div>
+                            )
+                          )}
+                        </div>
                       </div>
-                    ))}
-                  </div>
+                    )}
 
-                  <div className="mt-4 flex items-center justify-between">
-                    <a
-                      href="#contato"
-                      className="text-green-600 hover:text-green-700 font-semibold transition-colors"
-                    >
-                      Solicitar Orçamento
-                    </a>
-                  </div>
+                  <a
+                    href="#contato"
+                    className="block w-full text-center px-4 py-3 bg-gradient-to-r from-eco-500 to-eco-600 text-white rounded-lg font-semibold hover:from-eco-600 hover:to-eco-700 transition-all shadow-md hover:shadow-lg"
+                  >
+                    Solicitar Orçamento
+                  </a>
                 </div>
               </div>
             ))}
-          </div>
-        )}
-
-        {filteredProducts.length === 0 && !loading && (
-          <div className="text-center py-20">
-            <Package className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-            <p className="text-xl text-slate-600">Nenhum produto encontrado nesta categoria</p>
           </div>
         )}
       </div>

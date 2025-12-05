@@ -1,77 +1,85 @@
 import { useState } from 'react';
-import { Menu, X, Phone, Mail } from 'lucide-react';
+import { Mail, Menu, Phone, X } from 'lucide-react';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'Empresa', href: '#empresa' },
-    { name: 'Produtos', href: '#produtos' },
-    { name: 'Suporte', href: '#suporte' },
-    { name: 'Localização', href: '#localizacao' },
-    { name: 'Contato', href: '#contato' }
+  const menuItems = [
+    { label: 'Home', href: '#home' },
+    { label: 'Empresa', href: '#empresa' },
+    { label: 'Produtos', href: '#produtos' },
+    { label: 'Suporte', href: '#suporte' },
+    { label: 'Localização', href: '#localizacao' },
+    { label: 'Contato', href: '#contato' },
   ];
 
   return (
-    <header className="fixed w-full top-0 z-50 bg-slate-900 shadow-lg">
-      <div className="bg-slate-800 py-2 px-4 md:px-8 text-sm text-slate-300">
-        <div className="max-w-7xl mx-auto flex justify-end gap-6">
-          <a href="mailto:contato@ecofluid.com.br" className="flex items-center gap-2 hover:text-green-400 transition-colors">
-            <Mail className="w-4 h-4" />
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg">
+      <div className="bg-eco-600 text-white py-2">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center sm:justify-end items-center gap-4 text-sm">
+          <a
+            href="mailto:contato@ecofluid.com.br"
+            className="flex items-center gap-2 hover:text-eco-100 transition-colors"
+          >
+            <Mail className="h-4 w-4" />
             <span className="hidden sm:inline">contato@ecofluid.com.br</span>
           </a>
-          <a href="+557730251551" className="flex items-center gap-2 hover:text-green-400 transition-colors">
-            <Phone className="w-4 h-4" />
+          <a
+            href="tel:+557730251551"
+            className="flex items-center gap-2 hover:text-eco-100 transition-colors"
+          >
+            <Phone className="h-4 w-4" />
             <span>(77) 3025-1551</span>
           </a>
         </div>
       </div>
 
-      <nav className="max-w-7xl mx-auto px-4 md:px-8 py-4">
-        <div className="flex justify-between items-center">
-<a href="#home" className="flex items-center">
-  <div className="px-4 py-2 rounded">
-    <img src="/logo.png" alt="Logo da Ecofluid" className="h-12 w-auto" />
-  </div>
-</a>
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          <a href="#home" className="flex items-center">
+            <span className="text-2xl font-bold text-eco-700">
+              Eco<span className="text-eco-500">fluid</span>
+            </span>
+          </a>
+
+          <div className="hidden md:flex items-center space-x-8">
+            {menuItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-eco-800 hover:text-eco-500 font-medium transition-colors relative group"
+              >
+                {item.label}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-eco-500 transition-all group-hover:w-full"></span>
+              </a>
+            ))}
+          </div>
 
           <button
+            className="md:hidden text-eco-700 hover:text-eco-500 transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-white p-2"
-            aria-label="Toggle menu"
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </button>
-
-          <ul className="hidden md:flex gap-8">
-            {navItems.map((item) => (
-              <li key={item.name}>
-                <a
-                  href={item.href}
-                  className="text-white hover:text-green-400 transition-colors font-medium"
-                >
-                  {item.name}
-                </a>
-              </li>
-            ))}
-          </ul>
         </div>
 
         {isMenuOpen && (
-          <ul className="md:hidden mt-4 pb-4 space-y-4">
-            {navItems.map((item) => (
-              <li key={item.name}>
-                <a
-                  href={item.href}
-                  className="block text-white hover:text-green-400 transition-colors font-medium"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </a>
-              </li>
+          <div className="md:hidden py-4 bg-eco-50 rounded-b-lg">
+            {menuItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="block py-3 px-4 text-eco-800 hover:text-eco-500 hover:bg-white transition-all font-medium"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.label}
+              </a>
             ))}
-          </ul>
+          </div>
         )}
       </nav>
     </header>

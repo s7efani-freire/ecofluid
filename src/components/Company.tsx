@@ -1,71 +1,94 @@
-import { Factory, Award, Users, TrendingUp } from 'lucide-react';
+import { Award, BarChart3, Settings, Users } from 'lucide-react';
 
 export default function Company() {
+  const pillars = [
+    {
+      icon: Settings,
+      title: 'Tecnologia',
+      description:
+        'Equipamentos modernos e processos otimizados para máxima eficiência',
+    },
+    {
+      icon: Award,
+      title: 'Qualidade',
+      description:
+        'Certificações do setor e rigoroso controle de qualidade em todas as etapas',
+    },
+    {
+      icon: Users,
+      title: 'Equipe',
+      description: 'Profissionais especializados e comprometidos com a excelência',
+    },
+    {
+      icon: BarChart3,
+      title: 'Crescimento',
+      description: 'Expansão contínua e inovação constante em nossos processos',
+    },
+  ];
+
   return (
-    <section id="empresa" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
+    <section id="empresa" className="py-20 bg-gradient-to-br from-eco-50 to-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">A Ecofluid</h2>
-          <div className="w-24 h-1 bg-green-500 mx-auto"></div>
+          <h2 className="text-4xl md:text-5xl font-bold text-eco-800 mb-4">
+            Sobre a Ecofluid
+          </h2>
+          <p className="text-xl text-eco-700 max-w-3xl mx-auto">
+            Unindo sustentabilidade e tecnologia, transformamos materiais
+            reciclados em produtos de alta qualidade para o agronegócio e
+            indústria.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           <div>
             <img
-              src="https://casairriga.com.br/wp-content/uploads/2021/02/mangueira-de-polietileno-irrigacao-3-4-01-600x600.jpg"
-              alt="Fábrica Ecofluid"
-              className="rounded-2xl shadow-2xl w-full h-[400px] object-cover"
+              src="/about.png"
+              alt="Mangueiras de irrigação"
+              className="rounded-2xl shadow-2xl w-full h-[400px] object-cover border-4 border-eco-200"
             />
           </div>
 
           <div className="space-y-6">
-            <h3 className="text-3xl font-bold text-slate-900">Nossa História</h3>
-            <p className="text-lg text-slate-700 leading-relaxed">
-              A Ecofluid nasceu da visão de unir sustentabilidade e tecnologia, transformando
-              materiais reciclados em produtos de alta qualidade para o agronegócio e indústria.
-            </p>
-            <p className="text-lg text-slate-700 leading-relaxed">
-              Especializados na produção de PEAD reciclado e mangueiras de irrigação,
-              contribuímos para um futuro mais verde, reduzindo o impacto ambiental e
-              oferecendo soluções eficientes para nossos clientes.
-            </p>
-            <div className="grid grid-cols-2 gap-4 pt-6">
-              <div className="text-center p-4 bg-green-50 rounded-lg">
-                <div className="text-3xl font-bold text-green-600">2+</div>
-                <div className="text-slate-600">Anos de Experiência</div>
+            <div className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-eco-500">
+              <h3 className="text-2xl font-bold text-eco-800 mb-3">
+                Nossa História
+              </h3>
+              <p className="text-eco-700 leading-relaxed">
+                A Ecofluid é especializada na produção de PEAD reciclado e
+                mangueiras de irrigação, focando em reduzir o impacto ambiental
+                enquanto oferece soluções práticas aos nossos clientes.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-gradient-to-br from-eco-500 to-eco-600 p-6 rounded-xl text-white shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                <div className="text-3xl font-bold mb-1">2+</div>
+                <div className="text-eco-100 text-sm">Anos de Experiência</div>
               </div>
-              <div className="text-center p-4 bg-green-50 rounded-lg">
-                <div className="text-3xl font-bold text-green-600">5+</div>
-                <div className="text-slate-600">Toneladas Recicladas</div>
+              <div className="bg-gradient-to-br from-eco-600 to-eco-700 p-6 rounded-xl text-white shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                <div className="text-3xl font-bold mb-1">5+</div>
+                <div className="text-eco-100 text-sm">Toneladas Recicladas</div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-4 gap-8">
-          <div className="text-center p-6 bg-slate-50 rounded-xl hover:bg-green-50 transition-colors">
-            <Factory className="w-12 h-12 text-green-600 mx-auto mb-4" />
-            <h4 className="text-xl font-bold text-slate-900 mb-2">Tecnologia</h4>
-            <p className="text-slate-600">Equipamentos modernos e processos otimizados</p>
-          </div>
-
-          <div className="text-center p-6 bg-slate-50 rounded-xl hover:bg-green-50 transition-colors">
-            <Award className="w-12 h-12 text-green-600 mx-auto mb-4" />
-            <h4 className="text-xl font-bold text-slate-900 mb-2">Qualidade</h4>
-            <p className="text-slate-600">Certificações e controle rigoroso de qualidade</p>
-          </div>
-
-          <div className="text-center p-6 bg-slate-50 rounded-xl hover:bg-green-50 transition-colors">
-            <Users className="w-12 h-12 text-green-600 mx-auto mb-4" />
-            <h4 className="text-xl font-bold text-slate-900 mb-2">Equipe</h4>
-            <p className="text-slate-600">Profissionais especializados e comprometidos</p>
-          </div>
-
-          <div className="text-center p-6 bg-slate-50 rounded-xl hover:bg-green-50 transition-colors">
-            <TrendingUp className="w-12 h-12 text-green-600 mx-auto mb-4" />
-            <h4 className="text-xl font-bold text-slate-900 mb-2">Crescimento</h4>
-            <p className="text-slate-600">Expansão contínua e inovação constante</p>
-          </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {pillars.map((pillar, index) => (
+            <div
+              key={index}
+              className="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 border-t-4 border-eco-500"
+            >
+              <div className="w-14 h-14 bg-gradient-to-br from-eco-500 to-eco-600 rounded-xl flex items-center justify-center mb-4">
+                <pillar.icon className="h-7 w-7 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-eco-800 mb-2">
+                {pillar.title}
+              </h3>
+              <p className="text-eco-700 leading-relaxed">{pillar.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

@@ -1,84 +1,119 @@
 import { useState } from 'react';
-import { Send, Mail, Phone, MapPin, Clock } from 'lucide-react';
+import { Mail, MapPin, Phone, Clock, CheckCircle, Loader2 } from 'lucide-react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    message: ''
+    message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    setSubmitted(true);
     setIsSubmitting(false);
+    setShowSuccess(true);
     setFormData({ name: '', email: '', phone: '', message: '' });
 
-    setTimeout(() => setSubmitted(false), 5000);
+    setTimeout(() => {
+      setShowSuccess(false);
+    }, 5000);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
+
+  const benefits = [
+    'Produtos 100% sustentáveis',
+    'Qualidade garantida',
+    'Suporte especializado',
+    'Entrega regional',
+  ];
 
   return (
-    <section id="contato" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Faça Seu Orçamento</h2>
-          <div className="w-24 h-1 bg-green-500 mx-auto mb-6"></div>
-          <p className="text-xl text-slate-600">
-            Envie seu pedido e logo entraremos em contato
+    <section id="contato" className="py-20 bg-gradient-to-br from-eco-50 to-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-eco-800 mb-4">
+            Entre em Contato
+          </h2>
+          <p className="text-xl text-eco-700 max-w-3xl mx-auto">
+            Estamos prontos para atender você. Envie sua mensagem ou utilize
+            nossos canais de contato.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
-          <div>
+        <div className="grid lg:grid-cols-2 gap-12">
+          <div className="bg-white p-8 rounded-2xl shadow-lg border-t-4 border-eco-500">
+            <h3 className="text-2xl font-bold text-eco-800 mb-6">
+              Envie uma Mensagem
+            </h3>
+
+            {showSuccess && (
+              <div className="mb-6 p-4 bg-eco-100 border-l-4 border-eco-500 rounded-lg flex items-center gap-3">
+                <CheckCircle className="h-5 w-5 text-eco-600" />
+                <p className="text-eco-800 font-medium">
+                  Mensagem enviada com sucesso! Entraremos em contato em breve.
+                </p>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-semibold text-slate-700 mb-2">
-                  Nome *
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-semibold text-eco-800 mb-2"
+                >
+                  Nome Completo
                 </label>
                 <input
                   type="text"
                   id="name"
                   name="name"
-                  required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                  placeholder="Seu nome completo"
+                  required
+                  className="w-full px-4 py-3 border-2 border-eco-200 rounded-lg focus:border-eco-500 focus:ring-2 focus:ring-eco-200 transition-colors text-eco-800"
+                  placeholder="Seu nome"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-slate-700 mb-2">
-                  E-mail *
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-semibold text-eco-800 mb-2"
+                >
+                  E-mail
                 </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
-                  required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                  required
+                  className="w-full px-4 py-3 border-2 border-eco-200 rounded-lg focus:border-eco-500 focus:ring-2 focus:ring-eco-200 transition-colors text-eco-800"
                   placeholder="seu@email.com"
                 />
               </div>
 
               <div>
-                <label htmlFor="phone" className="block text-sm font-semibold text-slate-700 mb-2">
+                <label
+                  htmlFor="phone"
+                  className="block text-sm font-semibold text-eco-800 mb-2"
+                >
                   Telefone
                 </label>
                 <input
@@ -87,118 +122,121 @@ export default function Contact() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                  placeholder="(51) 99999-9999"
+                  required
+                  className="w-full px-4 py-3 border-2 border-eco-200 rounded-lg focus:border-eco-500 focus:ring-2 focus:ring-eco-200 transition-colors text-eco-800"
+                  placeholder="(77) 00000-0000"
                 />
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-semibold text-slate-700 mb-2">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-semibold text-eco-800 mb-2"
+                >
                   Mensagem
                 </label>
                 <textarea
                   id="message"
                   name="message"
-                  rows={6}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all resize-none"
-                  placeholder="Descreva seu pedido ou dúvida"
-                ></textarea>
+                  required
+                  rows={4}
+                  className="w-full px-4 py-3 border-2 border-eco-200 rounded-lg focus:border-eco-500 focus:ring-2 focus:ring-eco-200 transition-colors resize-none text-eco-800"
+                  placeholder="Como podemos ajudar?"
+                />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold transition-all transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full px-6 py-4 bg-gradient-to-r from-eco-500 to-eco-600 text-white rounded-lg font-semibold hover:from-eco-600 hover:to-eco-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+                    <Loader2 className="h-5 w-5 animate-spin" />
                     Enviando...
                   </>
                 ) : (
-                  <>
-                    <Send className="w-5 h-5" />
-                    Enviar Mensagem
-                  </>
+                  'Enviar Mensagem'
                 )}
               </button>
-
-              {submitted && (
-                <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg">
-                  Mensagem enviada com sucesso! Entraremos em contato em breve.
-                </div>
-              )}
             </form>
           </div>
 
           <div className="space-y-6">
-            <div className="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-8 rounded-2xl shadow-xl">
-              <div className="px-4 py-2 rounded inline-block mb-6">
-                <img src="/logo.png" alt="Logo da Ecofluid" className="h-12 w-auto" />
-              </div>
+            <div className="bg-gradient-to-br from-eco-600 to-eco-700 text-white p-8 rounded-2xl shadow-lg">
+              <h3 className="text-2xl font-bold mb-6">Informações de Contato</h3>
 
-              <div className="space-y-6">
+              <div className="space-y-4">
                 <div className="flex items-start gap-4">
-                  <MapPin className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
+                  <MapPin className="h-6 w-6 text-eco-200 flex-shrink-0 mt-1" />
                   <div>
-                    <h4 className="font-bold mb-1">Endereço</h4>
-                    <p className="text-slate-300">Pé de Galinha, 116</p>
-                    <p className="text-slate-300">Zona Rural 9, Vitória da Conquista - BA</p>
+                    <p className="font-semibold text-eco-100 mb-1">Endereço</p>
+                    <p className="text-eco-50">
+                      Pé de Galinha, 116
+                      <br />
+                      Zona Rural 9
+                      <br />
+                      Vitória da Conquista - BA
+                    </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <Mail className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
+                  <Mail className="h-6 w-6 text-eco-200 flex-shrink-0 mt-1" />
                   <div>
-                    <h4 className="font-bold mb-1">E-mail</h4>
-                    <a href="mailto:contato@ecofluid.com.br" className="text-slate-300 hover:text-green-400 transition-colors">
+                    <p className="font-semibold text-eco-100 mb-1">E-mail</p>
+                    <a
+                      href="mailto:contato@ecofluid.com.br"
+                      className="text-eco-50 hover:text-white transition-colors"
+                    >
                       contato@ecofluid.com.br
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <Phone className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
+                  <Phone className="h-6 w-6 text-eco-200 flex-shrink-0 mt-1" />
                   <div>
-                    <h4 className="font-bold mb-1">Telefone</h4>
-                    <a href="tel:+557730251551" className="text-slate-300 hover:text-green-400 transition-colors">
+                    <p className="font-semibold text-eco-100 mb-1">Telefone</p>
+                    <a
+                      href="tel:+557730251551"
+                      className="text-eco-50 hover:text-white transition-colors"
+                    >
                       (77) 3025-1551
                     </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <Clock className="w-6 h-6 text-green-400 flex-shrink-0 mt-1" />
+                  <Clock className="h-6 w-6 text-eco-200 flex-shrink-0 mt-1" />
                   <div>
-                    <h4 className="font-bold mb-1">Atendimento</h4>
-                    <p className="text-slate-300">Segunda a Sexta</p>
-                    <p className="text-slate-300">das 8h às 11h30 e das 13h às 18h</p>
+                    <p className="font-semibold text-eco-100 mb-1">Horário</p>
+                    <p className="text-eco-50">
+                      Segunda a Sexta
+                      <br />
+                      das 8h às 11h30 e das 13h às 18h
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-green-50 p-8 rounded-2xl border-2 border-green-200">
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Por que escolher a Ecofluid?</h3>
-              <ul className="space-y-3 text-slate-700">
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 mt-1">✓</span>
-                  <span>Produtos 100% sustentáveis</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 mt-1">✓</span>
-                  <span>Alta qualidade e durabilidade</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 mt-1">✓</span>
-                  <span>Suporte especializado</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 mt-1">✓</span>
-                  <span>Entrega para todo a região</span>
-                </li>
+            <div className="bg-white p-6 rounded-2xl shadow-lg border-l-4 border-eco-500">
+              <h4 className="text-xl font-bold text-eco-800 mb-4">
+                Por que escolher a Ecofluid?
+              </h4>
+              <ul className="space-y-3">
+                {benefits.map((benefit, index) => (
+                  <li
+                    key={index}
+                    className="flex items-center gap-3 text-eco-700"
+                  >
+                    <CheckCircle className="h-5 w-5 text-eco-500 flex-shrink-0" />
+                    <span>{benefit}</span>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

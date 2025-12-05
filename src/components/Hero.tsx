@@ -1,63 +1,111 @@
-import { Droplets, Recycle, Leaf } from 'lucide-react';
+import { ArrowRight, Droplet, Leaf, Recycle } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-32 pb-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      <div className="absolute inset-0 bg-[url('https://www.interbrasil.com.br/wp-content/uploads/2021/09/24403_02.jpg')] bg-cover bg-center opacity-10"></div>
+    <div
+      id="home"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+style={{
+  backgroundImage: "url('/hero.png')",
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundAttachment: 'fixed',
+}}
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              Ecofluid <span className="text-green-400">Plásticos</span>
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-eco-600/70 via-eco-700/60 to-eco-800/70"></div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="text-white">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+              Bem-vindo à{' '}
+              <span className="text-eco-200 drop-shadow-lg">
+                Ecofluid Plásticos
+              </span>
             </h1>
-            <p className="text-xl text-slate-300 mb-8 leading-relaxed">
-              A Ecofluid transforma materiais reciclados em produtos de alta qualidade em PEAD,
-              oferecendo soluções sustentáveis para irrigação e condução de fluidos.
+            <p className="text-xl md:text-2xl mb-8 text-eco-50 leading-relaxed">
+              Transformamos materiais reciclados em produtos de PEAD para
+              irrigação e condução de fluidos, unindo sustentabilidade e
+              qualidade superior.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="#produtos"
-                className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-semibold transition-all transform hover:scale-105 shadow-lg"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white text-eco-700 rounded-lg font-semibold hover:bg-eco-50 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
                 Ver Produtos
+                <ArrowRight className="ml-2 h-5 w-5" />
               </a>
               <a
                 href="#contato"
-                className="bg-transparent border-2 border-white hover:bg-white hover:text-slate-900 text-white px-8 py-4 rounded-lg font-semibold transition-all"
+                className="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-eco-700 transition-all shadow-lg"
               >
                 Fale Conosco
               </a>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-6">
-            <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20 hover:bg-white/20 transition-all">
-              <Recycle className="w-12 h-12 text-green-400 mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">100% Reciclado</h3>
-              <p className="text-slate-300">
-                Nossos produtos são fabricados com PEAD 100% reciclado, contribuindo para um planeta mais limpo.
-              </p>
+          <div className="grid gap-6">
+            <div className="bg-white/95 backdrop-blur-sm p-6 rounded-2xl shadow-2xl hover:shadow-3xl transition-all transform hover:-translate-y-2 border-l-4 border-eco-500">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 bg-eco-500 rounded-xl flex items-center justify-center">
+                    <Recycle className="h-6 w-6 text-white" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-eco-800 mb-2">
+                    100% Reciclado
+                  </h3>
+                  <p className="text-eco-700">
+                    Utilizamos PEAD 100% reciclado, contribuindo para um planeta
+                    mais limpo e sustentável.
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20 hover:bg-white/20 transition-all">
-              <Droplets className="w-12 h-12 text-green-400 mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">Alta Qualidade</h3>
-              <p className="text-slate-300">
-                Mangueiras e tubos de irrigação com resistência e durabilidade comprovadas.
-              </p>
+            <div className="bg-white/95 backdrop-blur-sm p-6 rounded-2xl shadow-2xl hover:shadow-3xl transition-all transform hover:-translate-y-2 border-l-4 border-eco-600">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 bg-eco-600 rounded-xl flex items-center justify-center">
+                    <Droplet className="h-6 w-6 text-white" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-eco-800 mb-2">
+                    Alta Qualidade
+                  </h3>
+                  <p className="text-eco-700">
+                    Mangueiras e tubos para irrigação com durabilidade comprovada
+                    e desempenho excepcional.
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20 hover:bg-white/20 transition-all">
-              <Leaf className="w-12 h-12 text-green-400 mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">Sustentável</h3>
-              <p className="text-slate-300">
-                Reduzimos o impacto ambiental transformando resíduos em produtos úteis.
-              </p>
+            <div className="bg-white/95 backdrop-blur-sm p-6 rounded-2xl shadow-2xl hover:shadow-3xl transition-all transform hover:-translate-y-2 border-l-4 border-eco-700">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 bg-eco-700 rounded-xl flex items-center justify-center">
+                    <Leaf className="h-6 w-6 text-white" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-eco-800 mb-2">
+                    Sustentável
+                  </h3>
+                  <p className="text-eco-700">
+                    Reduzimos impacto ambiental transformando resíduos em
+                    soluções práticas e eficientes.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
