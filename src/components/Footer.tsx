@@ -83,11 +83,11 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:contato@ecofluid.com.br"
+                  href="mailto:contato@ecofluidplasticos.com"
                   className="flex items-center gap-2 text-eco-100 hover:text-white transition-colors"
                 >
                   <Mail className="h-5 w-5" />
-                  <span className="text-sm">contato@ecofluid.com.br</span>
+                  <span className="text-sm">contato@ecofluidplasticos.com</span>
                 </a>
               </li>
               <li>
