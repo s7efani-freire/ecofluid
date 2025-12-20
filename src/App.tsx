@@ -6,19 +6,24 @@ import Support from './components/Support';
 import Location from './components/Location';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import { ProductsProvider } from './contexts/ProductsContext';
 
 function App() {
   return (
-    <div className="min-h-screen">
-      <Header />
-      <Hero />
-      <Company />
-      <Products />
-      <Support />
-      <Location />
-      <Contact />
-      <Footer />
-    </div>
+    <ProductsProvider>
+      <div className="min-h-screen">
+        <Header />
+        <main className="pt-20 sm:pt-24">
+        <Hero />
+        <Company />
+        <Products />
+        <Support />
+        <Location />
+        <Contact />
+        <Footer />
+        </main>
+      </div>
+    </ProductsProvider>
   );
 }
 
