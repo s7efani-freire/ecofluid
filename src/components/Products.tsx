@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Filter, Package } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 
 interface Product {
   id: string;
@@ -11,45 +10,68 @@ interface Product {
   specifications: Record<string, string>;
 }
 
+const products: Product[] = [
+  {
+    id: '1',
+    name: 'Tubo PEAD Reforçado',
+    description:
+      'Tubos de polietileno de alta densidade com alta durabilidade, ideais para sistemas de irrigação e transporte de água.',
+    category: 'PEAD',
+    specifications: {
+      Diâmetro: '110mm',
+      Pressão: '10 bar',
+      Comprimento: '6 m',
+    },
+  },
+  {
+    id: '2',
+    name: 'Mangueira de Irrigação Gotejadora',
+    description:
+      'Mangueiras flexíveis com emissores espaçados para distribuição uniforme de água em cultivos variados.',
+    category: 'mangueiras',
+    specifications: {
+      Vazão: '1,6 L/h',
+      Espaçamento: '30 cm',
+      Material: 'PEBD reciclado',
+    },
+  },
+  {
+    id: '3',
+    name: 'Tubo PEBD Flexível',
+    description:
+      'Tubos maleáveis de polietileno de baixa densidade, perfeitos para derivações e conexões rápidas.',
+    category: 'PEBD',
+    specifications: {
+      Diâmetro: '32mm',
+      Pressão: '4 bar',
+      Aplicação: 'Linhas laterais',
+    },
+  },
+  {
+    id: '4',
+    name: 'Mangueira de Aspersão',
+    description:
+      'Mangueira resistente com microfuros para aspersão homogênea em áreas de cultivo abertas.',
+    category: 'mangueiras',
+    specifications: {
+      Largura: '64 mm',
+      Espessura: '250 micras',
+      Alcance: 'Até 6 m',
+    },
+  },
+];
+
 export default function Products() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [activeFilter, setActiveFilter] = useState('all');
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const fetchProducts = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('products')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-
-      setProducts(data || []);
-      setFilteredProducts(data || []);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const filteredProducts =
+    activeFilter === 'all'
+      ? products
+      : products.filter(
+          (p) => p.category.toLowerCase() === activeFilter.toLowerCase()
+        );
 
   const filterProducts = (category: string) => {
     setActiveFilter(category);
-    if (category === 'all') {
-      setFilteredProducts(products);
-    } else {
-      setFilteredProducts(
-        products.filter(
-          (p) => p.category.toLowerCase() === category.toLowerCase()
-        )
-      );
-    }
   };
 
   const filters = [
@@ -58,14 +80,6 @@ export default function Products() {
     { id: 'PEAD', label: 'PEAD' },
     { id: 'PEBD', label: 'PEBD' },
   ];
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-white to-eco-50 flex items-center justify-center">
-        <div className="text-eco-600 text-xl">Carregando produtos...</div>
-      </div>
-    );
-  }
 
   return (
     <section id="produtos" className="py-20 bg-gradient-to-br from-white to-eco-50">
