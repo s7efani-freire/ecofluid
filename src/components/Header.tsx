@@ -18,11 +18,11 @@ export default function Header() {
       <div className="bg-eco-600 text-white py-2">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap justify-center sm:justify-end items-center gap-4 text-sm">
           <a
-            href="mailto:contato@ecofluid.com.br"
+            href="mailto:contato@ecofluidplasticos.com"
             className="flex items-center gap-2 hover:text-eco-100 transition-colors"
           >
             <Mail className="h-4 w-4" />
-            <span className="hidden sm:inline">contato@ecofluid.com.br</span>
+            <span className="hidden sm:inline">contato@ecofluidplasticos.com</span>
           </a>
           <a
             href="tel:+557730251551"
