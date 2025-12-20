@@ -11,20 +11,37 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+  try {
+    const resp = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...formData,
+        // honeypot opcional:
+        company: "",
+      }),
+    });
 
-    setIsSubmitting(false);
+    const data = await resp.json().catch(() => ({}));
+
+    if (!resp.ok || !data.ok) {
+      throw new Error(data?.error || "Não foi possível enviar a mensagem.");
+    }
+
     setShowSuccess(true);
-    setFormData({ name: '', email: '', phone: '', message: '' });
+    setFormData({ name: "", email: "", phone: "", message: "" });
 
-    setTimeout(() => {
-      setShowSuccess(false);
-    }, 5000);
-  };
+    setTimeout(() => setShowSuccess(false), 5000);
+  } catch (err: any) {
+    alert(err?.message || "Erro ao enviar. Tente novamente.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -188,10 +205,10 @@ export default function Contact() {
                   <div>
                     <p className="font-semibold text-eco-100 mb-1">E-mail</p>
                     <a
-                      href="mailto:contato@ecofluid.com.br"
+                      href="mailto:contato@ecofluidplasticos.com"
                       className="text-eco-50 hover:text-white transition-colors"
                     >
-                      contato@ecofluid.com.br
+                      contato@ecofluidplasticos.com
                     </a>
                   </div>
                 </div>
