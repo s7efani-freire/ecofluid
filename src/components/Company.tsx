@@ -43,7 +43,7 @@ export default function Company() {
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           <div>
             <img
-              src="/about.png"
+              src="/about.jpg"
               alt="Mangueiras de irrigação"
               className="rounded-2xl shadow-2xl w-full h-[400px] object-cover border-4 border-eco-200"
             />
