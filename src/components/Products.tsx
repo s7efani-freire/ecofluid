@@ -1,71 +1,30 @@
-import { useEffect, useState } from 'react';
-import { Filter, Package } from 'lucide-react';
-import { supabase } from '../lib/supabase';
-
-interface Product {
-  id: string;
-  name: string;
-  description: string;
-  category: string;
-  image_url?: string;
-  specifications: Record<string, string>;
-}
+import { useMemo, useState } from "react";
+import { Filter, Package } from "lucide-react";
+import { useProducts } from "../contexts/ProductsContext";
+import type { Product } from "../data/catalogo";
 
 export default function Products() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [activeFilter, setActiveFilter] = useState('all');
-  const [loading, setLoading] = useState(true);
+  const { products } = useProducts();
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+  const [activeFilter, setActiveFilter] = useState("all");
 
-  const fetchProducts = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('products')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-
-      setProducts(data || []);
-      setFilteredProducts(data || []);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const filteredProducts = useMemo(() => {
+    if (activeFilter === "all") return products;
+    return products.filter(
+      (p) => p.category.toLowerCase() === activeFilter.toLowerCase()
+    );
+  }, [activeFilter, products]);
 
   const filterProducts = (category: string) => {
     setActiveFilter(category);
-    if (category === 'all') {
-      setFilteredProducts(products);
-    } else {
-      setFilteredProducts(
-        products.filter(
-          (p) => p.category.toLowerCase() === category.toLowerCase()
-        )
-      );
-    }
   };
 
   const filters = [
-    { id: 'all', label: 'Todos' },
-    { id: 'mangueiras', label: 'Mangueiras' },
-    { id: 'PEAD', label: 'PEAD' },
-    { id: 'PEBD', label: 'PEBD' },
+    { id: "all", label: "Todos" },
+    { id: "mangueiras", label: "Mangueiras" },
+    { id: "PEAD", label: "PEAD" },
+    { id: "PEBD", label: "PEBD" },
   ];
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-white to-eco-50 flex items-center justify-center">
-        <div className="text-eco-600 text-xl">Carregando produtos...</div>
-      </div>
-    );
-  }
 
   return (
     <section id="produtos" className="py-20 bg-gradient-to-br from-white to-eco-50">
@@ -85,14 +44,15 @@ export default function Products() {
             <Filter className="h-5 w-5" />
             <span className="font-semibold">Filtrar:</span>
           </div>
+
           {filters.map((filter) => (
             <button
               key={filter.id}
               onClick={() => filterProducts(filter.id)}
               className={`px-6 py-2 rounded-lg font-medium transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 ${
                 activeFilter === filter.id
-                  ? 'bg-gradient-to-r from-eco-500 to-eco-600 text-white'
-                  : 'bg-white text-eco-700 hover:bg-eco-100'
+                  ? "bg-gradient-to-r from-eco-500 to-eco-600 text-white"
+                  : "bg-white text-eco-700 hover:bg-eco-100"
               }`}
             >
               {filter.label}
@@ -109,7 +69,7 @@ export default function Products() {
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProducts.map((product) => (
+            {filteredProducts.map((product: Product) => (
               <div
                 key={product.id}
                 className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all overflow-hidden group transform hover:-translate-y-2 border-t-4 border-eco-500"
