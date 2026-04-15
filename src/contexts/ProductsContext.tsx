@@ -1,22 +1,63 @@
 // src/contexts/ProductsContext.tsx
-
-import React, { createContext, useContext, useMemo, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import { supabase } from "../lib/supabase";
 import type { Product } from "../data/catalogo";
-import { CATALOGO_PRODUTOS } from "../data/catalogo";
 
 type ProductsContextValue = {
   products: Product[];
-  setProducts: React.Dispatch<React.SetStateAction<Product[]>>;
+  loading: boolean;
+  error: string | null;
+  refresh: () => Promise<void>;
 };
 
-const ProductsContext = createContext<ProductsContextValue | undefined>(undefined);
+const ProductsContext = createContext<ProductsContextValue | undefined>(
+  undefined
+);
 
 export function ProductsProvider({ children }: { children: React.ReactNode }) {
-  const [products, setProducts] = useState<Product[]>(CATALOGO_PRODUTOS);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const value = useMemo(() => ({ products, setProducts }), [products]);
+  const fetchProducts = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const { data, error: sbError } = await supabase
+        .from("products")
+        .select("*")
+        .eq("active", true)
+        .order("id");
 
-  return <ProductsContext.Provider value={value}>{children}</ProductsContext.Provider>;
+      if (sbError) throw sbError;
+      setProducts(data ?? []);
+    } catch (err: any) {
+      setError(err?.message ?? "Erro ao carregar produtos.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const value = useMemo(
+    () => ({ products, loading, error, refresh: fetchProducts }),
+    [products, loading, error]
+  );
+
+  return (
+    <ProductsContext.Provider value={value}>
+      {children}
+    </ProductsContext.Provider>
+  );
 }
 
 export function useProducts() {
