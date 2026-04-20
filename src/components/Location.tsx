@@ -5,8 +5,8 @@ export default function Location() {
     <section id="localizacao" className="py-20 bg-gradient-to-br from-white to-eco-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-eco-800 mb-4">
-            Nossa Localização
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Nossa <span className="text-eco-600">Localização</span>
           </h2>
           <div className="flex items-center justify-center gap-2 text-eco-700 text-lg">
             <MapPin className="h-6 w-6" />
