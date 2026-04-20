@@ -31,8 +31,8 @@ export default function Support() {
     <section id="suporte" className="py-20 bg-gradient-to-br from-eco-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-eco-800 mb-4">
-            Nosso Compromisso com Você
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Nosso <span className="text-eco-600">Compromisso</span> com Você
           </h2>
           <p className="text-xl text-eco-700 max-w-3xl mx-auto">
             Oferecemos suporte completo em toda a jornada do cliente, desde a
@@ -43,7 +43,7 @@ export default function Support() {
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-12">
           <div>
             <img
-              src="https://images.pexels.com/photos/3184398/pexels-photo-3184398.jpeg?auto=compress&cs=tinysrgb&w=800"
+              src="/IAF00390.jpg"
               alt="Equipe de suporte"
               className="rounded-2xl shadow-2xl w-full h-[400px] object-cover border-4 border-eco-200"
             />
