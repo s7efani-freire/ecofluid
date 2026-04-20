@@ -11,37 +11,37 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsSubmitting(true);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  try {
-    const resp = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        ...formData,
-        // honeypot opcional:
-        company: "",
-      }),
-    });
+    try {
+      const resp = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          // honeypot opcional:
+          company: "",
+        }),
+      });
 
-    const data = await resp.json().catch(() => ({}));
+      const data = await resp.json().catch(() => ({}));
 
-    if (!resp.ok || !data.ok) {
-      throw new Error(data?.error || "Não foi possível enviar a mensagem.");
+      if (!resp.ok || !data.ok) {
+        throw new Error(data?.error || "Não foi possível enviar a mensagem.");
+      }
+
+      setShowSuccess(true);
+      setFormData({ name: "", email: "", phone: "", message: "" });
+
+      setTimeout(() => setShowSuccess(false), 5000);
+    } catch (err: any) {
+      alert(err?.message || "Erro ao enviar. Tente novamente.");
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setShowSuccess(true);
-    setFormData({ name: "", email: "", phone: "", message: "" });
-
-    setTimeout(() => setShowSuccess(false), 5000);
-  } catch (err: any) {
-    alert(err?.message || "Erro ao enviar. Tente novamente.");
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -63,8 +63,8 @@ const handleSubmit = async (e: React.FormEvent) => {
     <section id="contato" className="py-20 bg-gradient-to-br from-eco-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-eco-800 mb-4">
-            Entre em Contato
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Entre em <span className="text-eco-600">Contato</span>
           </h2>
           <p className="text-xl text-eco-700 max-w-3xl mx-auto">
             Estamos prontos para atender você. Envie sua mensagem ou utilize
